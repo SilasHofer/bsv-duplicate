@@ -6,13 +6,13 @@ from src.util.detector import detect_duplicates
 # develop your test cases here
 
 @pytest.mark.unit
-def test_detect_duplicates_only_one_artical():
+@patch("src.util.parser.parse")
+def test_detect_duplicates_only_one_artical(mock_parse):
     data = [{"key": "12345",
     "doi": "20020"}]
-    with patch("parser") as mock_pars:
-        mock_pars.return_value = data
-        with pytest.raises(ValueError):
-            detect_duplicates(data)
+    mock_parse.return_value = data
+    with pytest.raises(ValueError):
+        detect_duplicates(data)
 
 @pytest.mark.unit
 def test_detect_duplicates_no_dublicate():
@@ -26,6 +26,7 @@ def test_detect_duplicates_no_dublicate():
 
 
 @pytest.mark.unit
+@patch("src.util.parser.parse")
 def test_detect_duplicates_dublict_DOI_no_dublicat_key():
     data = [{"key": "12345",
     "doi": "20020"},{"key": "12343",
