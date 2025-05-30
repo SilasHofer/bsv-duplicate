@@ -32,7 +32,7 @@ def test_detect_duplicates_dublict_DOI_no_dublicat_key():
     "doi": "20020"}]
     expect = [{"key": "12345",
     "doi": "20020"}]
-    with patch("parser") as mock_pars:
+    with patch("src.util.parser.parser") as mock_pars:
         mock_pars.return_value = data
         assert detect_duplicates(data) == expect
 
@@ -42,7 +42,7 @@ def test_detect_duplicates_no_DOI_and_not_dublicat_key():
     "doi": ""},{"key": "12343",
     "doi": ""}]
     expect = [""]
-    with patch("parser") as mock_pars:
+    with patch("src.util.parser.parser") as mock_pars:
         mock_pars.return_value = data
         assert detect_duplicates(data) == expect
 
@@ -52,7 +52,7 @@ def test_detect_duplicates_one_no_DOI_and_not_dublicat_key():
     "doi": ""},{"key": "12343",
     "doi": "20202"}]
     expect = [""]
-    with patch("parser") as mock_pars:
+    with patch("src.util.parser.parser") as mock_pars:
         mock_pars.return_value = data
         assert detect_duplicates(data) == expect
 
@@ -63,7 +63,7 @@ def test_detect_duplicates_one_no_DOI_and_dublicat_key():
     "doi": "20202"}]
     expect = [{"key": "12345",
     "doi": "20202"}]
-    with patch("parser") as mock_pars:
+    with patch("src.util.parser.parser") as mock_pars:
         mock_pars.return_value = data
         assert detect_duplicates(data) == expect
 
@@ -74,6 +74,6 @@ def test_detect_duplicates_no_DOI_and_dublicat_key():
     "doi": ""}]
     expect = [{"key": "12345",
     "doi": ""}]
-    with patch("parser") as mock_pars:
+    with patch("src.util.parser.parser") as mock_pars:
         mock_pars.return_value = data
         assert detect_duplicates(data) == expect
